@@ -6,16 +6,13 @@ from models import User, Ride, RideParticipation
 
 app = Flask(__name__)
 
-# ------------------------
-# MODELO según tu UML
-# ------------------------
 
 class RideParticipation:
     def __init__(self, participant, destination, occupiedSpaces):
-        self.participant = participant  # User
+        self.participant = participant  
         self.destination = destination
         self.occupiedSpaces = occupiedSpaces
-        self.status = "waiting"  # waiting, rejected, confirmed, missing, notmarked, inprogress, done
+        self.status = "waiting" 
         self.confirmation = None
 
 class Ride:
@@ -38,9 +35,8 @@ class User:
         self.alias = alias
         self.name = name
         self.carPlate = carPlate
-        self.rides = []  # List<RideParticipation>
+        self.rides = [] 
 
-        # stats
         self.previousRidesTotal = 0
         self.previousRidesCompleted = 0
         self.previousRidesMissing = 0
@@ -245,6 +241,5 @@ def unload_participant(alias, ride_id):
     p.participant.previousRidesTotal += 1
     return jsonify({"message": f"{alias} se bajó del ride {ride_id}."})
 
-# ------------------------
 if __name__ == "__main__":
     app.run(debug=True)
